@@ -1,2 +1,2 @@
 test:
-	env PYTHONPATH=${PYTHONPATH}:. python3.4 tests/*
+	env PYTHONPATH=${PYTHONPATH}:. python tests/*
