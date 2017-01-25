@@ -1,2 +1,6 @@
-test:
-	env PYTHONPATH=${PYTHONPATH}:. python tests/*
+init:
+	pip install -e .
+
+test: init
+	python tests/test_*
+	rm -rf float_range.egg-info
