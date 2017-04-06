@@ -2,13 +2,14 @@ def range(start, stop=None, step=1):
     if stop is None:
         stop, start = start, 0
 
+    cache_precision = _precision(step)
     if step < 0:
         while start > stop:
-            yield round(start, _precision(step))
+            yield round(start, cache_precision)
             start += step
     else:
         while start < stop:
-            yield round(start, _precision(step))
+            yield round(start, cache_precision)
             start += step
 
 def _precision(number):
