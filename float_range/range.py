@@ -45,6 +45,10 @@ class FloatRange:
         res = (item - self.minor) / self.step
         return res == round(res)
 
+    def __eq__(self, other):
+        attrs = ['start', 'stop', 'step']
+        return all(getattr(self, k) == getattr(other, k, None) for k in attrs)
+
     @staticmethod
     def _precision(number):
         try:

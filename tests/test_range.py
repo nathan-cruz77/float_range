@@ -32,6 +32,20 @@ class TestFloatRange(unittest.TestCase):
         self.assertEqual('FloatRange(10.0, 20.0, 1)', str(FloatRange(10., 20.)))
         self.assertEqual('FloatRange(10, 20, 3.2)', str(FloatRange(10, 20, 3.2)))
 
+    def test_equality(self):
+        self.assertTrue(FloatRange(10) == FloatRange(10.))
+        self.assertFalse(FloatRange(10) == FloatRange(9))
+        self.assertFalse(FloatRange(10) == 12)
+        self.assertFalse(12 == FloatRange(10))
+
+        self.assertFalse(FloatRange(1, 5) == FloatRange(5, 1))
+        self.assertTrue(FloatRange(1, 5) == FloatRange(1, 5))
+
+        self.assertFalse(FloatRange(51) == '12')
+        self.assertFalse('12' == FloatRange(51))
+
+        self.assertFalse(FloatRange(10) == None)
+
 
 class TestRange(unittest.TestCase):
 
