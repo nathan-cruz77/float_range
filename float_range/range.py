@@ -10,6 +10,8 @@ class FloatRange:
             self.start = start
             self.stop = stop
 
+        self.minor = min(self.start, self.stop)
+        self.major = max(self.start, self.stop)
         self.step = step
         self.precision = FloatRange._precision(step)
 
@@ -35,12 +37,12 @@ class FloatRange:
         return '{0}({1})'.format(self.__class__.__name__, aux)
 
     def __contains__(self, item):
-        if (self._isEmpty() or item >= max(self.start, self.stop)
-                or item < min(self.start, self.stop)):
+        if (self._is_empty() or item >= self.major
+                or item < self.minor):
             return False
 
         # the result should be true if res*step = item*min(start,stop)
-        res = (item - min(self.start, self.stop)) / self.step
+        res = (item - self.minor) / self.step
         return res == round(res)
 
     @staticmethod
