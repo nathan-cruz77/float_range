@@ -1,4 +1,4 @@
-
+import numbers
 
 class FloatRange:
 
@@ -44,6 +44,11 @@ class FloatRange:
         # the result should be true if res*step = item*min(start,stop)
         res = (item - self.minor) / self.step
         return res == round(res)
+
+    def count(self, item):
+        if isinstance(item, numbers.Number) and item in self:
+            return 1
+        return 0
 
     @staticmethod
     def _precision(number):
