@@ -3,6 +3,20 @@ import float_range
 from float_range.range import FloatRange
 
 
+class TestFloatRange(unittest.TestCase):
+
+    def test_repr_simple(self):
+        self.assertEqual('FloatRange(0, 10, 1)', str(FloatRange(10)))
+        self.assertEqual('FloatRange(10, 20, 1)', str(FloatRange(10, 20)))
+        self.assertEqual('FloatRange(10, 20, 3)', str(FloatRange(10, 20, 3)))
+
+    def test_repr_decimal(self):
+        self.assertEqual('FloatRange(0, 10.0, 1)', str(FloatRange(10.)))
+        self.assertEqual('FloatRange(0, 10.12, 1)', str(FloatRange(10.12)))
+        self.assertEqual('FloatRange(10.0, 20.0, 1)', str(FloatRange(10., 20.)))
+        self.assertEqual('FloatRange(10, 20, 3.2)', str(FloatRange(10, 20, 3.2)))
+
+
 class TestRange(unittest.TestCase):
 
     def test_single_argument_range(self):
