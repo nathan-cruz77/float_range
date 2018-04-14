@@ -35,7 +35,7 @@ class FloatRange:
 
     def __str__(self):
         aux = ', '.join(str(x) for x in [self.start, self.stop, self.step])
-        return '{}({})'.format(self.__class__.__name__, aux)
+        return '{0}({1})'.format(self.__class__.__name__, aux)
 
     @staticmethod
     def _precision(number):
