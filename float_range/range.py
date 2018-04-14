@@ -34,10 +34,6 @@ class FloatRange:
         aux = ', '.join(str(x) for x in [self.start, self.stop, self.step])
         return '{0}({1})'.format(self.__class__.__name__, aux)
 
-    def _isEmpty(self):
-        return ((self.start >= self.stop and self.step > 0)
-        or (self.start <= self.stop and self.step < 0))
-
     @staticmethod
     def _precision(number):
         try:
@@ -54,7 +50,7 @@ class FloatRange:
 
     def _isEmpty(self):
         return ((self.start >= self.stop and self.step > 0)
-                    or (self.start <= self.stop and self.step < 0))
+                or (self.start <= self.stop and self.step < 0))
 
 
 def range(start, stop=None, step=1):
