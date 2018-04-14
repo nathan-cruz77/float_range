@@ -15,6 +15,12 @@ class TestFloatRange(unittest.TestCase):
         expected_value = False
         self.assertEqual(expected_value, given_value)
 
+#   This test does not pass => tithe issue
+#    def test_contains_tithe(self):
+#        given_value = -4.667 in float_range.range(-6, 10, 1.333)
+#        expected_value = True
+#        self.assertEqual(expected_value, given_value)
+
     def test_repr_simple(self):
         self.assertEqual('FloatRange(0, 10, 1)', str(FloatRange(10)))
         self.assertEqual('FloatRange(10, 20, 1)', str(FloatRange(10, 20)))

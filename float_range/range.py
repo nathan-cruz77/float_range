@@ -35,9 +35,13 @@ class FloatRange:
         return '{0}({1})'.format(self.__class__.__name__, aux)
 
     def __contains__(self, item):
-        if self._isEmpty():
+        if (self._isEmpty() or item >= max(self.start, self.stop)
+                or item < min(self.start, self.stop)):
             return False
-        return True
+
+        # the result should be true if res*step = item*min(start,stop)
+        res = (item - min(self.start, self.stop)) / self.step
+        return res == round(res)
 
     @staticmethod
     def _precision(number):
