@@ -46,6 +46,20 @@ class TestFloatRange(unittest.TestCase):
 
         self.assertFalse(FloatRange(10) == None)
 
+    def test_inequality(self):
+        self.assertFalse(FloatRange(10) != FloatRange(10.))
+        self.assertTrue(FloatRange(10) != FloatRange(9))
+        self.assertTrue(FloatRange(10) != 12)
+        self.assertTrue(12 != FloatRange(10))
+
+        self.assertTrue(FloatRange(1, 5) != FloatRange(5, 1))
+        self.assertFalse(FloatRange(1, 5) != FloatRange(1, 5))
+
+        self.assertTrue(FloatRange(51) != '12')
+        self.assertTrue('12' != FloatRange(51))
+
+        self.assertTrue(FloatRange(10) != None)
+
 
 class TestRange(unittest.TestCase):
 
