@@ -1,6 +1,6 @@
 import unittest
 import float_range
-from float_range.range import _precision
+from float_range.range import FloatRange
 
 
 class TestRange(unittest.TestCase):
@@ -63,26 +63,26 @@ class TestPrecision(unittest.TestCase):
 
     def test_valid_number(self):
         expected_value = 1
-        given_value = _precision(12354.2)
+        given_value = FloatRange._precision(12354.2)
 
         self.assertEqual(expected_value, given_value)
 
         expected_value = 2
-        given_value = _precision(.22)
+        given_value = FloatRange._precision(.22)
 
         self.assertEqual(expected_value, given_value)
 
         expected_value = 1
-        given_value = _precision(22.)
+        given_value = FloatRange._precision(22.)
 
         self.assertEqual(expected_value, given_value)
 
     def test_invalid_number(self):
-        self.assertRaises(ValueError, _precision, '12.12.23')
-        self.assertRaises(ValueError, _precision, None)
-        self.assertRaises(ValueError, _precision, float('inf'))
-        self.assertRaises(ValueError, _precision, float('-inf'))
-        self.assertRaises(ValueError, _precision, 'lizard ')
+        self.assertRaises(ValueError, FloatRange._precision, '12.12.23')
+        self.assertRaises(ValueError, FloatRange._precision, None)
+        self.assertRaises(ValueError, FloatRange._precision, float('inf'))
+        self.assertRaises(ValueError, FloatRange._precision, float('-inf'))
+        self.assertRaises(ValueError, FloatRange._precision, 'lizard ')
 
 
 if __name__ == '__main__':
