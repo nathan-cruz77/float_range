@@ -27,6 +27,9 @@ class FloatRange:
         self.start += self.step
         return res
 
+    def next(self):
+        return self.__next__()
+
 
     @staticmethod
     def _precision(number):
