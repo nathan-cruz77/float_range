@@ -17,10 +17,7 @@ class FloatRange:
         return self
 
     def __next__(self):
-        if self.start >= self.stop and self.step > 0:
-            raise StopIteration
-
-        if self.start <= self.stop and self.step < 0:
+        if self._isEmpty():
             raise StopIteration
 
         res = round(self.start, self.precision)
@@ -50,6 +47,10 @@ class FloatRange:
             return 1
         else:
             return len(decimal_part)
+
+    def _isEmpty(self):
+        return ((self.start >= self.stop and self.step > 0)
+                    or (self.start <= self.stop and self.step < 0))
 
 
 def range(start, stop=None, step=1):
