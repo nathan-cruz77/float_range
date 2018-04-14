@@ -45,6 +45,13 @@ class FloatRange:
         res = (item - self.minor) / self.step
         return res == round(res)
 
+    def __len__(self):
+        if self._is_empty():
+            return 0
+
+        raw_len = abs(self.major - self.minor)
+        return int(raw_len/self.step)
+
     @staticmethod
     def _precision(number):
         try:
