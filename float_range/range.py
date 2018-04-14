@@ -37,7 +37,7 @@ class FloatRange:
     def __contains__(self, item):
         if self._isEmpty():
             return False
-        # insert logic here
+        return True
 
     @staticmethod
     def _precision(number):

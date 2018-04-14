@@ -1,0 +1,8 @@
+README
+setup.cfg
+float_range/__init__.py
+float_range/range.py
+float_range.egg-info/PKG-INFO
+float_range.egg-info/SOURCES.txt
+float_range.egg-info/dependency_links.txt
+float_range.egg-info/top_level.txt
