@@ -49,6 +49,9 @@ class FloatRange:
         attrs = ['start', 'stop', 'step']
         return all(getattr(self, k) == getattr(other, k, None) for k in attrs)
 
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     @staticmethod
     def _precision(number):
         try:
