@@ -5,14 +5,25 @@ from float_range.range import FloatRange
 
 class TestFloatRange(unittest.TestCase):
 
-    def test_min(self):
-        given_value = min(FloatRange(10, 0, -1.5))
+    def test_index(self):
         expected_value = 1
+
+        given_value = FloatRange(0, 10, 1.5).index(1.5)
+        self.assertEqual(expected_value, given_value)
+
+        given_value = FloatRange(10, 0, -1.5).index(8.5)
+        self.assertEqual(expected_value, given_value)
+
+    def test_min(self):
+        expected_value = 1
+
+        given_value = min(FloatRange(10, 0, -1.5))
         self.assertEqual(expected_value, given_value)
 
     def test_max(self):
-        given_value = max(FloatRange(10, 0, -1.5))
         expected_value = 10
+
+        given_value = max(FloatRange(10, 0, -1.5))
         self.assertEqual(expected_value, given_value)
 
 #    def test_min_max(self):
@@ -25,38 +36,51 @@ class TestFloatRange(unittest.TestCase):
 #        self.assertEqual(expected_value, given_value)
 
     def test_contains_true(self):
-        given_value = 1.5 in FloatRange(0, 10, 1.5)
         expected_value = True
+
+        given_value = 10 in FloatRange(10, 0, -1.5)
+        self.assertEqual(expected_value, given_value)
+
+        given_value = 8.5 in FloatRange(10, 0, -1.5)
         self.assertEqual(expected_value, given_value)
 
     def test_contains_false(self):
-        given_value = 1.6 in FloatRange(0, 10, 1.5)
         expected_value = False
+
+        given_value = 1.6 in FloatRange(0, 10, 1.5)
+        self.assertEqual(expected_value, given_value)
+
+        given_value = 0 in FloatRange(10, 0, -1.5)
         self.assertEqual(expected_value, given_value)
 
     def test_count_one(self):
-        given_value = FloatRange(0, 10.9, 1.5).count(1.5)
         expected_value = 1
+
+        given_value = FloatRange(0, 10.9, 1.5).count(1.5)
         self.assertEqual(expected_value, given_value)
 
     def test_count_zero(self):
-        given_value = FloatRange(0, 10.9, 1.6).count(1.5)
         expected_value = 0
+
+        given_value = FloatRange(0, 10.9, 1.6).count(1.5)
         self.assertEqual(expected_value, given_value)
 
     def test_count_invalid(self):
-        given_value = FloatRange(0, 10.9, 1.6).count('a')
         expected_value = 0
+
+        given_value = FloatRange(0, 10.9, 1.6).count('a')
         self.assertEqual(expected_value, given_value)
 
     def test_len_non_zero(self):
-        given_value = len(FloatRange(0, 10.5, 1.5))
         expected_value = 7
+
+        given_value = len(FloatRange(0, 10.5, 1.5))
         self.assertEqual(expected_value, given_value)
 
     def test_len_zero(self):
-        given_value = len(FloatRange(0, 10.5, 11))
         expected_value = 0
+
+        given_value = len(FloatRange(0, 10.5, 11))
         self.assertEqual(expected_value, given_value)
 
 #   This test does not pass => tithe issue
@@ -71,10 +95,15 @@ class TestFloatRange(unittest.TestCase):
         self.assertEqual('FloatRange(10, 20, 3)', str(FloatRange(10, 20, 3)))
 
     def test_repr_decimal(self):
-        self.assertEqual('FloatRange(0, 10.0, 1)', str(FloatRange(10.)))
-        self.assertEqual('FloatRange(0, 10.12, 1)', str(FloatRange(10.12)))
-        self.assertEqual('FloatRange(10.0, 20.0, 1)', str(FloatRange(10., 20.)))
-        self.assertEqual('FloatRange(10, 20, 3.2)', str(FloatRange(10, 20, 3.2)))
+        cases = [
+            ('FloatRange(0, 10.0, 1)', str(FloatRange(10.))),
+            ('FloatRange(0, 10.12, 1)', str(FloatRange(10.12))),
+            ('FloatRange(10.0, 20.0, 1)', str(FloatRange(10., 20.))),
+            ('FloatRange(10, 20, 3.2)', str(FloatRange(10, 20, 3.2))),
+        ]
+
+        for case in cases:
+            self.assertEqual(case[0], case[1])
 
     def test_equality_float(self):
         self.assertTrue(FloatRange(10) == FloatRange(10.))
@@ -117,6 +146,7 @@ class TestFloatRange(unittest.TestCase):
 
         for v in vals:
             self.assertTrue(obj != v)
+
 
 class TestRange(unittest.TestCase):
 

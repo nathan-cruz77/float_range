@@ -1,5 +1,6 @@
 import numbers
 
+
 class FloatRange:
 
     def __init__(self, start, stop=None, step=1):
@@ -37,12 +38,21 @@ class FloatRange:
         return '{0}({1})'.format(self.__class__.__name__, aux)
 
     def __contains__(self, item):
-        if (self._is_empty() or item >= self.major
-                or item < self.minor):
+        conditions = [
+            self._is_empty(),
+            item > self.major,
+            item < self.minor,
+            item == self.stop
+        ]
+
+        if any(conditions):
             return False
 
+        if self.start == item:
+            return True
+
         # the result should be true if res*step = item*min(start,stop)
-        res = (item - self.minor) / self.step
+        res = (item - self.start) / self.step
         return res == round(res)
 
     def __eq__(self, other):
@@ -58,6 +68,11 @@ class FloatRange:
 
         raw_len = abs(self.major - self.minor)
         return int(raw_len/self.step)
+
+    def index(self, item):
+        if item in self:
+            return abs((item - self.start) / self.step)
+        raise ValueError
 
     def count(self, item):
         if isinstance(item, numbers.Number) and item in self:
