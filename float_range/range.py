@@ -45,6 +45,13 @@ class FloatRange:
         res = (item - self.minor) / self.step
         return res == round(res)
 
+    def __eq__(self, other):
+        attrs = ['start', 'stop', 'step']
+        return all(getattr(self, k) == getattr(other, k, None) for k in attrs)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def __len__(self):
         if self._is_empty():
             return 0

@@ -42,6 +42,47 @@ class TestFloatRange(unittest.TestCase):
         self.assertEqual('FloatRange(10.0, 20.0, 1)', str(FloatRange(10., 20.)))
         self.assertEqual('FloatRange(10, 20, 3.2)', str(FloatRange(10, 20, 3.2)))
 
+    def test_equality_float(self):
+        self.assertTrue(FloatRange(10) == FloatRange(10.))
+
+    def test_equality_fail(self):
+        self.assertFalse(FloatRange(10) == FloatRange(9))
+
+    def test_equality_reverse(self):
+        self.assertFalse(12 == FloatRange(10))
+
+    def test_equality_multi_args(self):
+        self.assertFalse(FloatRange(1, 5) == FloatRange(5, 1))
+        self.assertTrue(FloatRange(1, 5) == FloatRange(1, 5))
+        self.assertTrue(FloatRange(1, 5, 2) == FloatRange(1, 5, 2))
+
+    def test_equality_wrong_type(self):
+        vals = ['12', 12, None]
+        obj = FloatRange(51)
+
+        for v in vals:
+            self.assertFalse(obj == v)
+
+    def test_inequality_float(self):
+        self.assertFalse(FloatRange(10) != FloatRange(10.))
+
+    def test_inequality_fail(self):
+        self.assertTrue(FloatRange(10) != FloatRange(9))
+
+    def test_inequality_reverse(self):
+        self.assertTrue(12 != FloatRange(10))
+
+    def test_inequality_multi_args(self):
+        self.assertTrue(FloatRange(1, 5) != FloatRange(5, 1))
+        self.assertFalse(FloatRange(1, 5) != FloatRange(1, 5))
+        self.assertFalse(FloatRange(1, 5, 2) != FloatRange(1, 5, 2))
+
+    def test_inequality_wrong_type(self):
+        vals = ['12', 12, None]
+        obj = FloatRange(51)
+
+        for v in vals:
+            self.assertTrue(obj != v)
 
 class TestRange(unittest.TestCase):
 
