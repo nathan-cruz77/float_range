@@ -71,8 +71,8 @@ class FloatRange:
 
     def index(self, item):
         if item in self:
-            return abs((item - self.start)/self.step)
-        return ValueError
+            return abs((item - self.start) / self.step)
+        raise ValueError
 
     def count(self, item):
         if isinstance(item, numbers.Number) and item in self:
