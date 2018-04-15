@@ -79,10 +79,13 @@ class FloatRange:
             return len(decimal_part)
 
     def _is_empty(self):
-        increasing_case = self.start >= self.stop and self.step > 0
-        decreasing_case = self.start <= self.stop and self.step < 0
+        return any([self._is_increasing(), self._is_decreasing()])
 
-        return any([increasing_case, decreasing_case])
+    def _is_increasing(self):
+        return self.start >= self.stop and self.step > 0
+
+    def _is_decreasing(self):
+        return self.start <= self.stop and self.step < 0
 
 
 def range(start, stop=None, step=1):
