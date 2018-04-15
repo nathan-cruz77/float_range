@@ -59,6 +59,11 @@ class FloatRange:
         raw_len = abs(self.major - self.minor)
         return int(raw_len/self.step)
 
+    def index(self, item):
+        if item in self:
+            return abs((item - self.start)/self.step)
+        return ValueError
+
     def count(self, item):
         if isinstance(item, numbers.Number) and item in self:
             return 1
