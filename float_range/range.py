@@ -37,12 +37,15 @@ class FloatRange:
         return '{0}({1})'.format(self.__class__.__name__, aux)
 
     def __contains__(self, item):
-        if (self._is_empty() or item >= self.major
-                or item < self.minor):
+        if (self._is_empty() or item > self.major
+                or item < self.minor or item == self.stop):
             return False
 
+        if self.start == item:
+            return True
+
         # the result should be true if res*step = item*min(start,stop)
-        res = (item - self.minor) / self.step
+        res = (item - self.start) / self.step
         return res == round(res)
 
     def __eq__(self, other):
