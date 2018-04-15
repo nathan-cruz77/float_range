@@ -1,4 +1,4 @@
-
+import numbers
 
 class FloatRange:
 
@@ -58,6 +58,11 @@ class FloatRange:
 
         raw_len = abs(self.major - self.minor)
         return int(raw_len/self.step)
+
+    def count(self, item):
+        if isinstance(item, numbers.Number) and item in self:
+            return 1
+        return 0
 
     @staticmethod
     def _precision(number):
