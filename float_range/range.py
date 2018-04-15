@@ -1,5 +1,6 @@
 import numbers
 
+
 class FloatRange:
 
     def __init__(self, start, stop=None, step=1):
@@ -37,8 +38,14 @@ class FloatRange:
         return '{0}({1})'.format(self.__class__.__name__, aux)
 
     def __contains__(self, item):
-        if (self._is_empty() or item > self.major
-                or item < self.minor or item == self.stop):
+        conditions = [
+            self._is_empty(),
+            item > self.major,
+            item < self.minor,
+            item == self.stop
+        ]
+
+        if any(conditions):
             return False
 
         if self.start == item:

@@ -44,7 +44,6 @@ class TestFloatRange(unittest.TestCase):
         given_value = 8.5 in FloatRange(10, 0, -1.5)
         self.assertEqual(expected_value, given_value)
 
-
     def test_contains_false(self):
         expected_value = False
 
@@ -96,10 +95,15 @@ class TestFloatRange(unittest.TestCase):
         self.assertEqual('FloatRange(10, 20, 3)', str(FloatRange(10, 20, 3)))
 
     def test_repr_decimal(self):
-        self.assertEqual('FloatRange(0, 10.0, 1)', str(FloatRange(10.)))
-        self.assertEqual('FloatRange(0, 10.12, 1)', str(FloatRange(10.12)))
-        self.assertEqual('FloatRange(10.0, 20.0, 1)', str(FloatRange(10., 20.)))
-        self.assertEqual('FloatRange(10, 20, 3.2)', str(FloatRange(10, 20, 3.2)))
+        cases = [
+            ('FloatRange(0, 10.0, 1)', str(FloatRange(10.))),
+            ('FloatRange(0, 10.12, 1)', str(FloatRange(10.12))),
+            ('FloatRange(10.0, 20.0, 1)', str(FloatRange(10., 20.))),
+            ('FloatRange(10, 20, 3.2)', str(FloatRange(10, 20, 3.2))),
+        ]
+
+        for case in cases:
+            self.assertEqual(case[0], case[1])
 
     def test_equality_float(self):
         self.assertTrue(FloatRange(10) == FloatRange(10.))
@@ -142,6 +146,7 @@ class TestFloatRange(unittest.TestCase):
 
         for v in vals:
             self.assertTrue(obj != v)
+
 
 class TestRange(unittest.TestCase):
 
