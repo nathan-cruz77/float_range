@@ -5,6 +5,16 @@ from float_range.range import FloatRange
 
 class TestFloatRange(unittest.TestCase):
 
+    def test_min(self):
+        given_value = min(FloatRange(10, 0, -1.5))
+        expected_value = 1
+        self.assertEqual(expected_value, given_value)
+
+    def test_max(self):
+        given_value = max(FloatRange(10, 0, -1.5))
+        expected_value = 10
+        self.assertEqual(expected_value, given_value)
+
     def test_contains_true(self):
         given_value = 1.5 in FloatRange(0, 10, 1.5)
         expected_value = True
