@@ -73,7 +73,7 @@ class FloatRange:
 
     def __getitem__(self, key):
         if not isinstance(key, int):
-            raise TypeError
+            raise TypeError('indices should be integers, floats or slices')
 
         pos_item = self.step * key + self.start
         neg_item = self.step * (len(self) + key) + self.start
@@ -84,7 +84,7 @@ class FloatRange:
         if neg_item in self:
             return neg_item
 
-        raise IndexError
+        raise IndexError('index out of range')
 
     def index(self, item):
         if item in self:
