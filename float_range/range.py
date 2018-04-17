@@ -1,4 +1,5 @@
 import numbers
+import math
 
 
 class FloatRange:
@@ -63,11 +64,27 @@ class FloatRange:
         return not self.__eq__(other)
 
     def __len__(self):
-        if self._is_empty():
+        raw_len = abs((self.major - self.minor) / self.step)
+
+        if self._is_empty() or raw_len < 1:
             return 0
 
-        raw_len = abs(self.major - self.minor)
-        return int(raw_len/self.step)
+        return int(math.ceil(raw_len))
+
+    def __getitem__(self, key):
+        if not isinstance(key, int):
+            raise TypeError
+
+        pos_item = self.step * key + self.start
+        neg_item = self.step * (len(self) + key) + self.start
+
+        if pos_item in self:
+            return pos_item
+
+        if neg_item in self:
+            return neg_item
+
+        raise IndexError
 
     def index(self, item):
         if item in self:

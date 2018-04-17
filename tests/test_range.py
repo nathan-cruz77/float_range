@@ -5,6 +5,18 @@ from float_range.range import FloatRange
 
 class TestFloatRange(unittest.TestCase):
 
+    def test_getitem_positive(self):
+        expected_value = 1.5
+
+        given_value = FloatRange(0, 10, 1.5)
+        self.assertEqual(expected_value, given_value[1])
+
+    def test_getitem_negative(self):
+        expected_value = 9
+
+        given_value = FloatRange(0, 10, 1.5)
+        self.assertEqual(expected_value, given_value[-1])
+
     def test_index(self):
         expected_value = 1
 
