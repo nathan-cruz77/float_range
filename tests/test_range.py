@@ -227,6 +227,12 @@ class TestRange(unittest.TestCase):
 
         self.assertEqual(expected_value, given_value)
 
+    def test_properly_sum_floats(self):
+        expected_value = [9, 9.2, 9.4, 9.6, 9.8]
+        given_value = [i for i in float_range.range(9, 10, 0.2)]
+
+        self.assertEqual(expected_value, given_value)
+
 
 class TestPrecision(unittest.TestCase):
 

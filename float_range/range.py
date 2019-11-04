@@ -24,8 +24,9 @@ class FloatRange:
         if self._is_empty():
             raise StopIteration
 
-        res = round(self.start, self.precision)
-        self.start += self.step
+        res = self.start
+        self.start = round(self.start + self.step, self.precision)
+
         return res
 
     def next(self):
