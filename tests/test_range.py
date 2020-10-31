@@ -50,14 +50,14 @@ class TestFloatRange(unittest.TestCase):
         given_value = max(FloatRange(10, 0, -1.5))
         self.assertEqual(expected_value, given_value)
 
-#    def test_min_max(self):
-#        seq = FloatRange(10, 0, -1.5)
-#        # previous calls of min and max should not affect now
-#        min(seq)
-#        max(seq)
-#        given_value = min(seq)
-#        expected_value = 1
-#        self.assertEqual(expected_value, given_value)
+    def test_min_max(self):
+       seq = FloatRange(10, 0, -1.5)
+       # previous calls of min and max should not affect now
+       min(seq)
+       max(seq)
+       given_value = min(seq)
+       expected_value = 1
+       self.assertEqual(expected_value, given_value)
 
     def test_contains_true(self):
         expected_value = True
