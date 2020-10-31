@@ -12,12 +12,16 @@ class FloatRange:
             self.start = start
             self.stop = stop
 
+        self.initial_start = self.start
+        self.initial_stop = self.stop
+
         self.minor = min(self.start, self.stop)
         self.major = max(self.start, self.stop)
         self.step = step
         self.precision = FloatRange._precision(step)
 
     def __iter__(self):
+        self._reset()
         return self
 
     def __next__(self):
@@ -119,6 +123,10 @@ class FloatRange:
 
     def _is_decreasing(self):
         return self.start <= self.stop and self.step < 0
+
+    def _reset(self):
+        self.start = self.initial_start
+        self.stop = self.initial_stop
 
 
 def range(start, stop=None, step=1):
